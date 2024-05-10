@@ -5,10 +5,11 @@ import { TbCategory } from "react-icons/tb";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import { Link } from 'react-router-dom';
 
 const BookCard = ({ book }) => {
   // console.log(book);
-  const { _id, author, bookName, bookUrl, category, context,ratings } = book;
+  const { _id, author, bookName, bookUrl, category,ratings } = book;
   // console.log(ratings);
   return (
     <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
@@ -16,7 +17,7 @@ const BookCard = ({ book }) => {
         <img
           className="object-cover object-center w-48 h-72"
           src={bookUrl}
-          alt="avatar"
+          alt={bookName}
         />
       </div>
 
@@ -41,6 +42,12 @@ const BookCard = ({ book }) => {
           <Rating
            style={{ maxWidth: 150 }}
             readOnly value={ratings} />
+        </div>
+        <div className="flex items-center justify-center my-3">
+          <Link
+           to={`/update-book/${_id}`}
+           className="btn w-full btn-primary text-black dark:text-white"
+           >Update</Link>
         </div>
       </div>
     </div>
