@@ -7,6 +7,7 @@ import Register from './../pages/Register';
 import AddBooks from './../pages/AddBooks';
 import ProtectedRoute from '../components/ProtectedRoute';
 import AllBooks from './../pages/AllBooks';
+import BorrowedBooks from './../pages/BorrowedBooks';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path:'/all-books',
                 element: <ProtectedRoute><AllBooks/></ProtectedRoute>,
+            },
+            {
+                path:'/borrowed-books',
+                element: <ProtectedRoute><BorrowedBooks/></ProtectedRoute>,
             },
            
             // {

@@ -40,7 +40,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="text-base sm:text-lg lg:text-sm" to="/mylist">
+            <NavLink className="text-base sm:text-lg lg:text-sm" to="/borrowed-books">
               Borrowed Books
             </NavLink>
           </li>
