@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 import { ScrollRestoration, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuthProvider from "./../hooks/useAuthProvider";
-import useAxiosSecure from './../hooks/useAxiosSecure';
+import useAxiosSecure from "./../hooks/useAxiosSecure";
 
 const AddBooks = () => {
   const { user } = useAuthProvider();
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { displayName, email } = user;
   const defaultValues = {
     bookName: "",
@@ -20,6 +20,7 @@ const AddBooks = () => {
     quantity: "",
     ratings: "",
     context: "",
+    short_desc: "",
   };
 
   const {
@@ -37,15 +38,15 @@ const AddBooks = () => {
     const bookInfo = {
       ...data,
       quantity: parseInt(data.quantity),
-      ratings: parseInt(data.ratings),
+      ratings: parseFloat(data.ratings),
       publisherName: displayName || "",
       publisherEmail: email || "",
     };
 
-    console.log(bookInfo);
+    // console.log(bookInfo);
     axiosSecure.post('/addBook', bookInfo)
     .then(res=> {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data?.insertedId){
         toast.success("Added successfully");
         // navigate("/all-books")
@@ -54,17 +55,6 @@ const AddBooks = () => {
         })
       }
     })
-    // axios
-    //   .post("https://nova-tourism-server.vercel.app/addBook", bookInfo)
-    //   .then((res) => {
-    //     // console.log(res);
-    //     if (res.data?.insertedId) {
-    //       toast.success("Added Successfully");
-    //       reset({
-    //         ...defaultValues,
-    //       });
-    //     }
-    //   });
   };
 
   // console.log(user);
@@ -139,11 +129,9 @@ const AddBooks = () => {
                   type="text"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
-                  <option value="Novel">Novel</option>
-                  <option value="Poetry">Poetry</option>
-                  <option value="Thriller">Thriller</option>
+                  <option value="Novel">Kids</option>
+                  <option value="Comics">Comics</option>
                   <option value="History">History</option>
-                  <option value="Drama">Drama</option>
                   <option value="Sci-Fi">Sci-Fi</option>
                 </select>
               </div>
@@ -233,30 +221,30 @@ const AddBooks = () => {
                         message: "This field is required.",
                       },
                       min: {
-                        value: 1,
-                        message: "Not less than 1",
+                        value: 0.1,
+                        message: "Not less than 0.1",
                       },
                       max: {
                         value: 5,
                         message: "Not more than 5",
                       },
-                      
                     }
                   )}
                   id="ratings"
+                  min="0.1"
+                  max="5"
+                  step="0.1"
                   type="number"
                   placeholder="Ex: 4"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
                 {errors?.ratings?.message && (
-                  <span className="text-red-500">
-                    {errors.ratings.message}
-                  </span>
+                  <span className="text-red-500">{errors.ratings.message}</span>
                 )}
               </div>
 
               <div className="col-span-full">
-                <label htmlFor="bio" className="text-sm">
+                <label htmlFor="context" className="text-sm">
                   Book Context
                 </label>
                 <textarea
@@ -266,12 +254,33 @@ const AddBooks = () => {
                       message: "This field is required.",
                     },
                   })}
-                  id="bio"
+                  id="context"
                   placeholder="Sample book context here..."
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 ></textarea>
                 {errors?.context?.message && (
                   <span className="text-red-500">{errors.context.message}</span>
+                )}
+              </div>
+              <div className="col-span-full">
+                <label htmlFor="short_desc" className="text-sm">
+                  Short Description
+                </label>
+                <textarea
+                  {...register("short_desc", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
+                  id="short_desc"
+                  placeholder="Sample book short description here..."
+                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                ></textarea>
+                {errors?.short_desc?.message && (
+                  <span className="text-red-500">
+                    {errors.short_desc.message}
+                  </span>
                 )}
               </div>
 

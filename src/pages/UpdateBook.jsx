@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { ScrollRestoration, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import {
+  ScrollRestoration,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import axios from "axios";
 import useAuthProvider from "../hooks/useAuthProvider";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -12,16 +17,22 @@ const UpdateBook = () => {
   const bookData = useLoaderData();
   const navigate = useNavigate();
 
-
-  const {_id,  bookName, category, author, bookUrl, quantity, ratings, context } =
-    bookData;
+  const {
+    _id,
+    bookName,
+    category,
+    author,
+    bookUrl,
+    quantity,
+    ratings,
+    context,
+  } = bookData;
 
   let defaultValues = {
     bookName,
     category,
     author,
     bookUrl,
-    quantity,
     ratings,
     context,
   };
@@ -40,20 +51,17 @@ const UpdateBook = () => {
   const onSubmitBook = (data) => {
     const bookInfo = {
       ...data,
-      quantity: parseInt(data.quantity),
-      ratings: parseInt(data.ratings),
-      
+      ratings: parseFloat(data.ratings),
     };
 
     // console.log(bookInfo);
     axiosSecure.patch(`/updatebook/${_id}`, bookInfo).then((res) => {
-    //   console.log(res.data);
-      if(res?.data?.modifiedCount>0){
+      //   console.log(res.data);
+      if (res?.data?.modifiedCount > 0) {
         toast.success("Modified Successfuly");
-        navigate('/all-books')
-      }
-      else{
-        toast.error("Can't update.")
+        navigate("/all-books");
+      } else {
+        toast.error("Can't update.");
       }
     });
     // axios
@@ -141,11 +149,9 @@ const UpdateBook = () => {
                   type="text"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
-                  <option value="Novel">Novel</option>
-                  <option value="Poetry">Poetry</option>
-                  <option value="Thriller">Thriller</option>
+                  <option value="Novel">Kids</option>
+                  <option value="Comics">Comics</option>
                   <option value="History">History</option>
-                  <option value="Drama">Drama</option>
                   <option value="Sci-Fi">Sci-Fi</option>
                 </select>
               </div>
@@ -194,34 +200,6 @@ const UpdateBook = () => {
               </div>
 
               <div className="">
-                <label htmlFor="quantity" className="text-sm">
-                  Quantity of Book
-                </label>
-                <input
-                  {...register("quantity", {
-                    required: {
-                      value: true,
-                      message: "This field is required.",
-                    },
-                    min: {
-                      value: 1,
-                      message: "Not less than 1",
-                    },
-                  })}
-                  id="quantity"
-                  type="number"
-                  required={true}
-                  placeholder="Ex: 10"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
-                />
-                {errors?.quantity?.message && (
-                  <span className="text-red-500">
-                    {errors.quantity.message}
-                  </span>
-                )}
-              </div>
-
-              <div className="">
                 <label htmlFor="ratings" className="text-sm">
                   Ratings
                 </label>
@@ -235,8 +213,8 @@ const UpdateBook = () => {
                         message: "This field is required.",
                       },
                       min: {
-                        value: 1,
-                        message: "Not less than 1",
+                        value: 0.1,
+                        message: "Not less than 0.1",
                       },
                       max: {
                         value: 5,
@@ -245,6 +223,9 @@ const UpdateBook = () => {
                     }
                   )}
                   id="ratings"
+                  min="0.1"
+                  max="5"
+                  step="0.1"
                   type="number"
                   placeholder="Ex: 4"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
