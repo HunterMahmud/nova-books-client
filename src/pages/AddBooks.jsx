@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuthProvider from "./../hooks/useAuthProvider";
 import useAxiosSecure from './../hooks/useAxiosSecure';
@@ -10,6 +10,7 @@ import useAxiosSecure from './../hooks/useAxiosSecure';
 const AddBooks = () => {
   const { user } = useAuthProvider();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate()
   const { displayName, email } = user;
   const defaultValues = {
     bookName: "",
@@ -45,6 +46,13 @@ const AddBooks = () => {
     axiosSecure.post('/addBook', bookInfo)
     .then(res=> {
       console.log(res.data);
+      if (res.data?.insertedId){
+        toast.success("Added successfully");
+        // navigate("/all-books")
+        reset({
+          ...defaultValues
+        })
+      }
     })
     // axios
     //   .post("https://nova-tourism-server.vercel.app/addBook", bookInfo)

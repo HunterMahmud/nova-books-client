@@ -9,6 +9,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import AllBooks from './../pages/AllBooks';
 import BorrowedBooks from './../pages/BorrowedBooks';
 import UpdateBook from './../pages/UpdateBook';
+import CategoryPage from './../components/CategoryPage';
 
 
 const router = createBrowserRouter([
@@ -38,12 +39,13 @@ const router = createBrowserRouter([
                 element: <ProtectedRoute><UpdateBook/></ProtectedRoute>,
                 loader: ({params}) => fetch(`http://localhost:3000/books/${params.id}`)
             },
+            {
+                path:'/category/:categoryName',
+                element: <ProtectedRoute><CategoryPage/></ProtectedRoute>,
+                // loader: ({params}) => fetch(`http://localhost:3000/category/${params.categoryName}`)
+            },
            
-            // {
-            //     path:'/:country',
-            //     element: <Country/>,
-            //     loader: ({params}) => fetch(`https://nova-tourism-server.vercel.app/country/${params.country}`),
-            // },
+            
             
             // {
             //     path:'/aboutus',

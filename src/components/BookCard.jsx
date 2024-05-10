@@ -7,7 +7,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { Link } from 'react-router-dom';
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, details }) => {
   // console.log(book);
   const { _id, author, bookName, bookUrl, category,ratings } = book;
   // console.log(ratings);
@@ -44,10 +44,16 @@ const BookCard = ({ book }) => {
             readOnly value={ratings} />
         </div>
         <div className="flex items-center justify-center my-3">
-          <Link
+          {
+            details ? <Link
+            to={`/update-book/${_id}`}
+            className="btn w-full btn-primary text-black dark:text-white"
+            >View Details</Link>:
+            <Link
            to={`/update-book/${_id}`}
            className="btn w-full btn-primary text-black dark:text-white"
            >Update</Link>
+          }
         </div>
       </div>
     </div>
