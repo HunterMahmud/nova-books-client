@@ -6,6 +6,7 @@ import Login from './../pages/Login';
 import Register from './../pages/Register';
 import AddBooks from './../pages/AddBooks';
 import ProtectedRoute from '../components/ProtectedRoute';
+import AllBooks from './../pages/AllBooks';
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path:'/add-books',
                 element: <ProtectedRoute><AddBooks/></ProtectedRoute>,
+            },
+            {
+                path:'/all-books',
+                element: <ProtectedRoute><AllBooks/></ProtectedRoute>,
             },
            
             // {

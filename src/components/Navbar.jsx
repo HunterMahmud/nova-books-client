@@ -4,6 +4,7 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import { useState } from "react";
 import { useEffect } from "react";
 import useAuthProvider from "./../hooks/useAuthProvider";
+import logo from '../assets/Logo.png'
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
@@ -34,7 +35,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className="text-base sm:text-lg lg:text-sm" to="/allspot">
+            <NavLink className="text-base sm:text-lg lg:text-sm" to="/all-books">
               All Books
             </NavLink>
           </li>
@@ -100,11 +101,16 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link
-            to="/"
-            className="btn btn-ghost text-xl md:text-2xl lg:text-3xl hover:bg-violet-500 font-bugrasimo hover:text-white -ml-3 md:ml-3 px-1 md:px-3"
+          <Link 
+            to='/'
+            className="flex items-center justify-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
-            BookShelf
+            <img
+              src={logo}
+              className="h-8"
+              alt="BookShelf Logo"
+            />
+            
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

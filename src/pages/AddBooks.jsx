@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import { ScrollRestoration } from "react-router-dom";
 import axios from "axios";
 import useAuthProvider from "./../hooks/useAuthProvider";
+import useAxiosSecure from './../hooks/useAxiosSecure';
 
 const AddBooks = () => {
   const { user } = useAuthProvider();
+  const axiosSecure = useAxiosSecure();
   const { displayName, email } = user;
   const defaultValues = {
     bookName: "",
@@ -15,7 +17,7 @@ const AddBooks = () => {
     author: "",
     bookUrl: "",
     quantity: "",
-    rattings: "",
+    ratings: "",
     context: "",
   };
 
@@ -31,17 +33,19 @@ const AddBooks = () => {
   });
 
   const onSubmitBook = (data) => {
-    // console.log(data);
     const bookInfo = {
       ...data,
       quantity: parseInt(data.quantity),
-      rattings: parseInt(data.rattings),
+      ratings: parseInt(data.ratings),
       publisherName: displayName || "",
       publisherEmail: email || "",
     };
 
     console.log(bookInfo);
-
+    axiosSecure.post('/addBook', bookInfo)
+    .then(res=> {
+      console.log(res.data);
+    })
     // axios
     //   .post("https://nova-tourism-server.vercel.app/addBook", bookInfo)
     //   .then((res) => {
@@ -208,12 +212,12 @@ const AddBooks = () => {
               </div>
 
               <div className="">
-                <label htmlFor="rattings" className="text-sm">
-                  Rattings
+                <label htmlFor="ratings" className="text-sm">
+                  Ratings
                 </label>
                 <input
                   {...register(
-                    "rattings",
+                    "ratings",
 
                     {
                       required: {
@@ -228,16 +232,17 @@ const AddBooks = () => {
                         value: 5,
                         message: "Not more than 5",
                       },
+                      
                     }
                   )}
-                  id="rattings"
+                  id="ratings"
                   type="number"
                   placeholder="Ex: 4"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
-                {errors?.rattings?.message && (
+                {errors?.ratings?.message && (
                   <span className="text-red-500">
-                    {errors.rattings.message}
+                    {errors.ratings.message}
                   </span>
                 )}
               </div>
