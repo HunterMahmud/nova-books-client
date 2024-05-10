@@ -46,7 +46,7 @@ const BookCard = ({ book, details }) => {
         <div className="flex items-center justify-center my-3">
           {
             details ? <Link
-            to={`/update-book/${_id}`}
+            to={`/view-details/${_id}`}
             className="btn w-full btn-primary text-black dark:text-white"
             >View Details</Link>:
             <Link

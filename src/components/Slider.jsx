@@ -49,7 +49,7 @@ const Slider = () => {
               to="/allspot"
               className=" mt-3 p-2 border font-bugrasimo border-blue-500 bg-violet-500 font-bold rounded-md text-lg"
             >
-               Get Now
+               Read Now
             </Link>
           </div>
         </div>
