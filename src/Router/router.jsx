@@ -4,6 +4,8 @@ import Root from './../Layouts/Root';
 import Home from './../pages/Home';
 import Login from './../pages/Login';
 import Register from './../pages/Register';
+import AddBooks from './../pages/AddBooks';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 
 const router = createBrowserRouter([
@@ -15,6 +17,10 @@ const router = createBrowserRouter([
             {
                 path:'/',
                 element: <Home/>,
+            },
+            {
+                path:'/add-books',
+                element: <ProtectedRoute><AddBooks/></ProtectedRoute>,
             },
            
             // {

@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const Root = () => {
     return (
-        <div>
-           navbar will appear here
+        <div className='bg-white dark:bg-gray-900'>
+           <Navbar/>
             <Outlet/>
             footer will appear here
         </div>

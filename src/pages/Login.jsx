@@ -57,7 +57,7 @@ import {
     return (
       <div className="mx-2">
         <Helmet>
-          <title>Login | Nova Books</title>
+          <title>Login | BookShelf</title>
         </Helmet>
         <ScrollRestoration />
         <div
