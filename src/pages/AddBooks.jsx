@@ -10,7 +10,6 @@ const AddBooks = () => {
   const { user } = useAuthProvider();
   const { displayName, email } = user;
   const defaultValues = {
-   
     bookName: "",
     category: "",
     author: "",
@@ -24,7 +23,7 @@ const AddBooks = () => {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitSuccessful },
+    formState: { isSubmitSuccessful, errors },
   } = useForm({
     defaultValues: {
       ...defaultValues,
@@ -32,16 +31,16 @@ const AddBooks = () => {
   });
 
   const onSubmitBook = (data) => {
-    console.log(data);
-    // const bookInfo = {
-    //   ...data,
-    //   averageCost: parseInt(data.quantity),
-    //   travelTime: parseInt(data.rattings),
-    //   publisherName: displayName || "",
-    //   publisherEmail: email || "",
-    // };
+    // console.log(data);
+    const bookInfo = {
+      ...data,
+      quantity: parseInt(data.quantity),
+      rattings: parseInt(data.rattings),
+      publisherName: displayName || "",
+      publisherEmail: email || "",
+    };
 
-    // console.log(bookInfo);
+    console.log(bookInfo);
 
     // axios
     //   .post("https://nova-tourism-server.vercel.app/addBook", bookInfo)
@@ -92,24 +91,40 @@ const AddBooks = () => {
                   Book Name
                 </label>
                 <input
-                  {...register("bookName")}
+                  {...register("bookName", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
                   id="bookName"
                   type="text"
                   required={true}
                   placeholder="Ex: The Designer's Cookbook"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
-                />
+                />{" "}
+                {errors?.bookName?.message && (
+                  <span className="text-red-500">
+                    {errors.bookName.message}
+                  </span>
+                )}
               </div>
+
               <div className="">
                 <label htmlFor="category" className="text-sm">
                   Book Category
                 </label>
 
                 <select
-                  {...register("category")}
+                  {...register("category", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
                   id="category"
-                  type="text"
                   required={true}
+                  type="text"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
                   <option value="Novel">Novel</option>
@@ -125,26 +140,43 @@ const AddBooks = () => {
                   Author Name
                 </label>
                 <input
-                  {...register("author")}
+                  {...register("author", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
                   id="author"
                   type="text"
                   required={true}
                   placeholder="Ex: Jim Richardson"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
+                {errors?.author?.message && (
+                  <span className="text-red-500">{errors.author.message}</span>
+                )}
               </div>
+
               <div className="">
                 <label htmlFor="bookUrl" className="text-sm">
                   Book Photo URL
                 </label>
                 <input
-                  {...register("bookUrl")}
+                  {...register("bookUrl", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
                   id="bookUrl"
                   type="url"
                   required={true}
                   placeholder="Ex: https://www.image.com/img.jpg"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
+                {errors?.bookUrl?.message && (
+                  <span className="text-red-500">{errors.bookUrl.message}</span>
+                )}
               </div>
 
               <div className="">
@@ -152,26 +184,62 @@ const AddBooks = () => {
                   Quantity of Book
                 </label>
                 <input
-                  {...register("quantity")}
+                  {...register("quantity", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                    min: {
+                      value: 1,
+                      message: "Not less than 1",
+                    },
+                  })}
                   id="quantity"
                   type="number"
                   required={true}
                   placeholder="Ex: 10"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
+                {errors?.quantity?.message && (
+                  <span className="text-red-500">
+                    {errors.quantity.message}
+                  </span>
+                )}
               </div>
+
               <div className="">
                 <label htmlFor="rattings" className="text-sm">
                   Rattings
                 </label>
                 <input
-                  {...register("rattings")}
+                  {...register(
+                    "rattings",
+
+                    {
+                      required: {
+                        value: true,
+                        message: "This field is required.",
+                      },
+                      min: {
+                        value: 1,
+                        message: "Not less than 1",
+                      },
+                      max: {
+                        value: 5,
+                        message: "Not more than 5",
+                      },
+                    }
+                  )}
                   id="rattings"
                   type="number"
-                  required={true}
                   placeholder="Ex: 4"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
+                {errors?.rattings?.message && (
+                  <span className="text-red-500">
+                    {errors.rattings.message}
+                  </span>
+                )}
               </div>
 
               <div className="col-span-full">
@@ -179,12 +247,19 @@ const AddBooks = () => {
                   Book Context
                 </label>
                 <textarea
-                  {...register("context")}
-                  required={true}
+                  {...register("context", {
+                    required: {
+                      value: true,
+                      message: "This field is required.",
+                    },
+                  })}
                   id="bio"
                   placeholder="Sample book context here..."
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 ></textarea>
+                {errors?.context?.message && (
+                  <span className="text-red-500">{errors.context.message}</span>
+                )}
               </div>
 
               <div className="flex justify-end py-4">
