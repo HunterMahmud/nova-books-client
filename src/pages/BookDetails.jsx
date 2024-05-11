@@ -1,12 +1,44 @@
-import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import "@smastrom/react-rating/style.css";
+import useAxiosSecure from "./../hooks/useAxiosSecure";
+import useAuthProvider from "./../hooks/useAuthProvider";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
-  const bookInfo = useLoaderData();
+  // const loadedBookInfo = useLoaderData();
+  const { id } = useParams();
+  const [bookInfo, setBookInfo] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuthProvider();
+  const { email, displayName } = user;
+  // console.log(user);
   //   console.log(bookInfo);
+  const refetch = () => {
+    axiosSecure.get(`books/${id}`).then((res) => {
+      setBookInfo(res.data);
+    });
+  };
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow;
+  });
+
+  const minimumDate = new Date();
+  minimumDate.setDate(minimumDate.getDate() + 1);
+
   const {
     _id,
     bookName,
@@ -17,32 +49,122 @@ const BookDetails = () => {
     quantity,
     ratings,
   } = bookInfo;
+  const handleSubmit = () => {
+    // console.log(selectedDate);
+    if (selectedDate) {
+      const info = {
+        borrowerEmail: email,
+        borrowerName: displayName,
+        returnDate: selectedDate,
+        ...bookInfo,
+      };
+      const {
+        borrowerEmail,
+        borrowerName,
+        returnDate,
+        _id,
+        author,
+        bookName,
+        bookUrl,
+        category,
+        short_desc,
+        context,
+        publisherEmail,
+        quantity,
+        ratings        
+      } = info;
+      const borrowInfo = {
+        borrowerEmail,
+        borrowerName,
+        returnDate,
+        id:_id,
+        author,
+        bookName,
+        bookUrl,
+        category,
+        short_desc,
+        context,
+        publisherEmail,
+        quantity,
+        ratings
+      }
+      // console.log(borrowInfo);
+      if (borrowInfo.quantity > 0) {
+        axiosSecure.post(`/borrow/${_id}`, borrowInfo).then((res) => {
+          // console.log(res.data);
+          if (res.data?.exist) {
+            toast.error("Already borrowed");
+          }
+          if (res?.data?.insertedId) {
+            toast.success("Borrow Success");
+
+            // console.log(borrowInfo.quantity);
+            borrowInfo.quantity = borrowInfo.quantity - 1;
+            // console.log(borrowInfo.quantity);
+            axiosSecure
+              .patch(`/books/${_id}`, { quantity: borrowInfo.quantity })
+              .then((res) => {
+                // console.log(res.data);
+                if (res?.data?.modifiedCount > 0) {
+                  // console.log(_id, borrowInfo);
+                  refetch();
+                }
+              });
+          }
+        });
+      }
+    }
+
+    setIsOpen(false);
+  };
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="max-w-[85rem] mx-auto my-10 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col-reverse md:flex-row gap-5">
         <div className="flow-root md:w-1/2 rounded-lg  py-3 shadow-sm">
           <dl className="-my-3 divide-y divide-gray-100 dark:divide-gray-200 text-sm">
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Book Name</dt>
-              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">{bookName}</dd>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Book Name
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {bookName}
+              </dd>
             </div>
 
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Author</dt>
-              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">{author}</dd>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Author
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {author}
+              </dd>
             </div>
 
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Category</dt>
-              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">{category}</dd>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Category
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {category}
+              </dd>
             </div>
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Quantity</dt>
-              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">{quantity}</dd>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Quantity
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {quantity}
+              </dd>
             </div>
 
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Ratings</dt>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Ratings
+              </dt>
               <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
                 <div className="flex items-center text-gray-700 dark:text-gray-200">
                   <Rating style={{ maxWidth: 150 }} readOnly value={ratings} />
@@ -51,14 +173,63 @@ const BookDetails = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
-              <dt className="font-medium text-gray-900 dark:text-gray-100">Context Info</dt>
-              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">{context}</dd>
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Context Info
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {context}
+              </dd>
             </div>
           </dl>
 
-          <Link to={`modal`} className="py-3 px-4 mt-7 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-            Borrow
-          </Link>
+          <div className="mt-5">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setIsOpen(true)}
+            >
+              Borrow
+            </button>
+
+            {isOpen && (
+              <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-700 bg-opacity-50 z-10">
+                <div className="bg-white rounded-lg shadow dark:bg-gray-700 p-8">
+                  <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+                    Return Date
+                  </h2>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="datePicker"
+                      className="block mb-2 text-gray-800 dark:text-gray-200"
+                    >
+                      Select Date:
+                    </label>
+                    <DatePicker
+                      id="datePicker"
+                      selected={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                      minDate={minimumDate}
+                      required
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                  </div>
+                  <div className="flex gap-3">
+                    <button
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </button>
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                      onClick={handleCancel}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="relative ms-4 md:w-1/2 ">

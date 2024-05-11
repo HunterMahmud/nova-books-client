@@ -48,7 +48,7 @@ const router = createBrowserRouter([
             {
                 path:'/view-details/:id',
                 element: <ProtectedRoute><BookDetails/></ProtectedRoute>,
-                loader: ({params}) => fetch(`http://localhost:3000/books/${params.id}`)
+                
             },
            
             
