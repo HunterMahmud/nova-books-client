@@ -55,12 +55,14 @@ const BookDetails = () => {
       const info = {
         borrowerEmail: email,
         borrowerName: displayName,
+        borrowedDate:new Date(),
         returnDate: selectedDate,
         ...bookInfo,
       };
       const {
         borrowerEmail,
         borrowerName,
+        borrowedDate,
         returnDate,
         _id,
         author,
@@ -76,6 +78,7 @@ const BookDetails = () => {
       const borrowInfo = {
         borrowerEmail,
         borrowerName,
+        borrowedDate,
         returnDate,
         id:_id,
         author,

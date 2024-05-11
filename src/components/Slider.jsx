@@ -46,7 +46,7 @@ const Slider = () => {
           <div className="flex gap-3">
            
             <Link
-              to="/allspot"
+              to="/all-books"
               className=" mt-3 p-2 border font-bugrasimo border-blue-500 bg-violet-500 font-bold rounded-md text-lg"
             >
                Read Now

@@ -5,11 +5,11 @@ import { TbCategory } from "react-icons/tb";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const BookCard = ({ book, details }) => {
-  // console.log(book);
-  const { _id, author, bookName, bookUrl, category,ratings } = book;
+const BookCard = ({ book, status }) => {
+  console.log(book);
+  const { _id, author, bookName, bookUrl, category, ratings } = book;
   // console.log(ratings);
   return (
     <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
@@ -33,27 +33,56 @@ const BookCard = ({ book, details }) => {
         <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
           {bookName}
         </h1>
-        <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <FaBook />
+        {status == 3 ? (
+          <>
+            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+              <span className="font-semibold">Borrow Date:</span>
+              <h1 className="px-2 text-sm">
+                 {new Date(book.borrowedDate).toLocaleDateString()}
+              </h1>
+            </div>
+            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+              <span className="font-semibold">Return Date:</span>
+              <h1 className="px-2 text-sm">
+                {new Date(book.returnDate).toLocaleDateString()}
+              </h1>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+              <FaBook />
 
-          <h1 className="px-2 text-sm">{author}</h1>
-        </div>
-        <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <Rating
-           style={{ maxWidth: 150 }}
-            readOnly value={ratings} />
-        </div>
+              <h1 className="px-2 text-sm">{author}</h1>
+            </div>
+            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+              <Rating style={{ maxWidth: 150 }} readOnly value={ratings} />
+            </div>
+          </>
+        )}
+
         <div className="flex items-center justify-center my-3">
-          {
-            details ? <Link
-            to={`/view-details/${_id}`}
-            className="btn w-full btn-primary text-black dark:text-white"
-            >View Details</Link>:
+          {status == 1 && (
             <Link
-           to={`/update-book/${_id}`}
-           className="btn w-full btn-primary text-black dark:text-white"
-           >Update</Link>
-          }
+              to={`/view-details/${_id}`}
+              className="btn w-full btn-primary text-black dark:text-white"
+            >
+              View Details
+            </Link>
+          )}
+          {status == 2 && (
+            <Link
+              to={`/update-book/${_id}`}
+              className="btn w-full btn-primary text-black dark:text-white"
+            >
+              Update
+            </Link>
+          )}
+          {status == 3 && (
+            <button className="btn w-full btn-primary text-black dark:text-white">
+              Return
+            </button>
+          )}
         </div>
       </div>
     </div>

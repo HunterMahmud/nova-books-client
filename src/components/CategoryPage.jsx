@@ -20,7 +20,7 @@ const CategoryPage = () => {
     <div className="my-10">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {allBooks.map((book) => (
-          <BookCard key={book._id} details={true} book={book} />
+          <BookCard key={book._id} status={1} book={book} />
         ))}
       </div>
     </div>
