@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import {
+  Link,
+  ScrollRestoration,
+  useLoaderData,
+  useParams,
+} from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
 
 import DatePicker from "react-datepicker";
@@ -9,6 +14,7 @@ import "@smastrom/react-rating/style.css";
 import useAxiosSecure from "./../hooks/useAxiosSecure";
 import useAuthProvider from "./../hooks/useAuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const BookDetails = () => {
   // const loadedBookInfo = useLoaderData();
@@ -55,7 +61,7 @@ const BookDetails = () => {
       const info = {
         borrowerEmail: email,
         borrowerName: displayName,
-        borrowedDate:new Date(),
+        borrowedDate: new Date(),
         returnDate: selectedDate,
         ...bookInfo,
       };
@@ -73,14 +79,14 @@ const BookDetails = () => {
         context,
         publisherEmail,
         quantity,
-        ratings        
+        ratings,
       } = info;
       const borrowInfo = {
         borrowerEmail,
         borrowerName,
         borrowedDate,
         returnDate,
-        id:_id,
+        id: _id,
         author,
         bookName,
         bookUrl,
@@ -89,8 +95,8 @@ const BookDetails = () => {
         context,
         publisherEmail,
         quantity,
-        ratings
-      }
+        ratings,
+      };
       // console.log(borrowInfo);
       if (borrowInfo.quantity > 0) {
         axiosSecure.post(`/borrow/${_id}`, borrowInfo).then((res) => {
@@ -101,20 +107,18 @@ const BookDetails = () => {
           if (res?.data?.insertedId) {
             toast.success("Borrow Success");
 
-            
             axiosSecure
               .patch(`/books/${_id}`, { operation: "-" })
               .then((res) => {
-                // console.log(res.data);
-                if (res?.data?.id > 0) {
-                  // console.log(_id, borrowInfo);
+                console.log(res.data);
+                if (res?.data?._id) {
+                  console.log(_id, borrowInfo);
                   refetch();
                 }
               });
           }
         });
-      }
-      else{
+      } else {
         toast.error("Not available");
       }
     }
@@ -124,9 +128,32 @@ const BookDetails = () => {
   const handleCancel = () => {
     setIsOpen(false);
   };
-
+  if (bookInfo.length == 0) {
+    return (
+      <div className="w-full bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 min-h-[calc(100vh-349px)] flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div className="max-w-[85rem] mx-auto my-10 px-4 sm:px-6 lg:px-8">
+      <Helmet>
+        <title>{bookName} Details | BookShelf</title>
+      </Helmet>
+      <ScrollRestoration />
+      <h1
+        data-aos="fade-down"
+        className="text-3xl lg:text-5xl font-bold font-bugrasimo text-center mt-7 my-3 dark:text-gray-100 text-gray-900"
+      >
+        {bookName}
+      </h1>
+      <p
+        data-aos="fade-down"
+        data-aos-delay={100}
+        className="text-center mb-10 text-gray-800 dark:text-gray-200"
+      >
+        Details about book
+      </p>
       <div className="flex flex-col-reverse md:flex-row gap-5">
         <div className="flow-root md:w-1/2 rounded-lg  py-3 shadow-sm">
           <dl className="-my-3 divide-y divide-gray-100 dark:divide-gray-200 text-sm">
@@ -188,7 +215,7 @@ const BookDetails = () => {
 
           <div className="mt-5">
             <button
-            disabled={quantity>0 ? false: true}
+              disabled={quantity > 0 ? false : true}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-violet-300 disabled:cursor-not-allowed"
               onClick={() => setIsOpen(true)}
             >

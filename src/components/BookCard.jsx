@@ -18,13 +18,13 @@ const BookCard = ({ book, status ,againReload }) => {
     // console.log(id);
     axiosSecure.delete(`/borrow/${id}`)
     .then(res=> {
-      // console.log(res.data);
+      console.log(res.data);
       if(res.data?.deletedCount>0){
-        toast.success("Return success")
         axiosSecure.patch(`/books/${book.id}`,{operation:'+'})
         .then(res=> {
-          console.log(res.data);
+          // console.log(res.data);
           againReload();
+          toast.success("Return success")
         })
       }
     })

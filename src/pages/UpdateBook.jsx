@@ -16,14 +16,13 @@ const UpdateBook = () => {
   const axiosSecure = useAxiosSecure();
   const bookData = useLoaderData();
   const navigate = useNavigate();
-
+// console.log(bookData);
   const {
     _id,
     bookName,
     category,
     author,
     bookUrl,
-    quantity,
     ratings,
     context,
   } = bookData;
@@ -36,7 +35,7 @@ const UpdateBook = () => {
     ratings,
     context,
   };
-  console.log(defaultValues);
+  // console.log(defaultValues);
   const {
     register,
     handleSubmit,
@@ -64,17 +63,7 @@ const UpdateBook = () => {
         toast.error("Can't update.");
       }
     });
-    // axios
-    //   .post("https://nova-tourism-server.vercel.app/addBook", bookInfo)
-    //   .then((res) => {
-    //     // console.log(res);
-    //     if (res.data?.insertedId) {
-    //       toast.success("Added Successfully");
-    //       reset({
-    //         ...defaultValues,
-    //       });
-    //     }
-    //   });
+   
   };
 
   // console.log(user);
@@ -149,7 +138,7 @@ const UpdateBook = () => {
                   type="text"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
-                  <option value="Novel">Kids</option>
+                  <option value="Kids">Kids</option>
                   <option value="Comics">Comics</option>
                   <option value="History">History</option>
                   <option value="Sci-Fi">Sci-Fi</option>
@@ -257,7 +246,7 @@ const UpdateBook = () => {
 
               <div className="flex justify-end py-4">
                 <button className="p-2 px-4 font-bugrasimo rounded-md text-gray-100 bg-violet-500 disabled:bg-violet-300 disabled:text-gray-400 disabled:cursor-not-allowed">
-                  Add
+                  Update
                 </button>
               </div>
             </form>
