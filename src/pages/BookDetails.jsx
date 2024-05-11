@@ -106,7 +106,7 @@ const BookDetails = () => {
               .patch(`/books/${_id}`, { operation: "-" })
               .then((res) => {
                 // console.log(res.data);
-                if (res?.data?.modifiedCount > 0) {
+                if (res?.data?.id > 0) {
                   // console.log(_id, borrowInfo);
                   refetch();
                 }

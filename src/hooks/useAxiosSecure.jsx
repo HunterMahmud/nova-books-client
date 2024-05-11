@@ -2,8 +2,9 @@
 import axios  from 'axios';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000',
-    // withCredentials: true,
+    // baseURL: 'http://localhost:3000',
+    baseURL: 'https://nova-books-server.vercel.app',
+    withCredentials: true,
 
 })
 const useAxiosSecure = () => {
