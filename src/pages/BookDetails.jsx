@@ -101,11 +101,9 @@ const BookDetails = () => {
           if (res?.data?.insertedId) {
             toast.success("Borrow Success");
 
-            // console.log(borrowInfo.quantity);
-            borrowInfo.quantity = borrowInfo.quantity - 1;
-            // console.log(borrowInfo.quantity);
+            
             axiosSecure
-              .patch(`/books/${_id}`, { quantity: borrowInfo.quantity })
+              .patch(`/books/${_id}`, { operation: "-" })
               .then((res) => {
                 // console.log(res.data);
                 if (res?.data?.modifiedCount > 0) {

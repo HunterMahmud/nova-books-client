@@ -6,11 +6,30 @@ import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 import { Link } from "react-router-dom";
+import useAxiosSecure from './../hooks/useAxiosSecure';
+import { toast } from "react-toastify";
 
-const BookCard = ({ book, status }) => {
-  console.log(book);
+const BookCard = ({ book, status ,againReload }) => {
+  // console.log(book);
+  const axiosSecure = useAxiosSecure();
   const { _id, author, bookName, bookUrl, category, ratings } = book;
   // console.log(ratings);
+  const handleReturn = (id) => {
+    // console.log(id);
+    axiosSecure.delete(`/borrow/${id}`)
+    .then(res=> {
+      // console.log(res.data);
+      if(res.data?.deletedCount>0){
+        toast.success("Return success")
+        axiosSecure.patch(`/books/${book.id}`,{operation:'+'})
+        .then(res=> {
+          console.log(res.data);
+          againReload();
+        })
+      }
+    })
+  }
+
   return (
     <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
       <div className="w-full h-72 flex items-center justify-center">
@@ -29,8 +48,8 @@ const BookCard = ({ book, status }) => {
         </h1>
       </div>
 
-      <div className="px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
+      <div className="px-6 flex flex-col justify-between">
+        <h1 className="text-xl my-2 font-semibold text-gray-800 dark:text-white">
           {bookName}
         </h1>
         {status == 3 ? (
@@ -79,7 +98,9 @@ const BookCard = ({ book, status }) => {
             </Link>
           )}
           {status == 3 && (
-            <button className="btn w-full btn-primary text-black dark:text-white">
+            <button
+            onClick={() => handleReturn(_id)}
+            className="btn w-full btn-primary text-black dark:text-white">
               Return
             </button>
           )}

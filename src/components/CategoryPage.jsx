@@ -16,11 +16,14 @@ const CategoryPage = () => {
     });
   }, [cate]);
 //   console.log(allBooks);
+const againReload = ()=> {
+
+}
   return (
     <div className="my-10">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {allBooks.map((book) => (
-          <BookCard key={book._id} status={1} book={book} />
+          <BookCard key={book._id} againReload={againReload} status={1} book={book} />
         ))}
       </div>
     </div>
