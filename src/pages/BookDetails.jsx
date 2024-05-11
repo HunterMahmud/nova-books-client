@@ -113,6 +113,9 @@ const BookDetails = () => {
           }
         });
       }
+      else{
+        toast.error("Not available");
+      }
     }
 
     setIsOpen(false);
@@ -184,7 +187,8 @@ const BookDetails = () => {
 
           <div className="mt-5">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            disabled={quantity>0 ? false: true}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-violet-300 disabled:cursor-not-allowed"
               onClick={() => setIsOpen(true)}
             >
               Borrow
