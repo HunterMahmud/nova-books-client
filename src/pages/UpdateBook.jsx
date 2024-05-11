@@ -24,7 +24,6 @@ const UpdateBook = () => {
     author,
     bookUrl,
     ratings,
-    context,
   } = bookData;
 
   let defaultValues = {
@@ -33,7 +32,6 @@ const UpdateBook = () => {
     author,
     bookUrl,
     ratings,
-    context,
   };
   // console.log(defaultValues);
   const {
@@ -224,25 +222,7 @@ const UpdateBook = () => {
                 )}
               </div>
 
-              <div className="col-span-full">
-                <label htmlFor="bio" className="text-sm">
-                  Book Context
-                </label>
-                <textarea
-                  {...register("context", {
-                    required: {
-                      value: true,
-                      message: "This field is required.",
-                    },
-                  })}
-                  id="bio"
-                  placeholder="Sample book context here..."
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
-                ></textarea>
-                {errors?.context?.message && (
-                  <span className="text-red-500">{errors.context.message}</span>
-                )}
-              </div>
+           
 
               <div className="flex justify-end py-4">
                 <button className="p-2 px-4 font-bugrasimo rounded-md text-gray-100 bg-violet-500 disabled:bg-violet-300 disabled:text-gray-400 disabled:cursor-not-allowed">
