@@ -55,11 +55,7 @@ const Navbar = () => {
           </li>
         </>
       )}
-      <li>
-        <NavLink className="text-base sm:text-lg lg:text-sm" to="/aboutus">
-          About Us
-        </NavLink>
-      </li>
+
       {!user && (
         <>
           <li>

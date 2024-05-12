@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path:'/update-book/:id',
                 element: <ProtectedRoute><UpdateBook/></ProtectedRoute>,
-                loader: ({params}) => fetch(`https://nova-books-server.vercel.app/books/${params.id}`)
+                loader: ({params}) => fetch(`${import.meta.env.VITE_API_BASE_URL}/books/${params.id}`)
             },
             {
                 path:'/category/:categoryName',

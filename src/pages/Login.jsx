@@ -45,7 +45,6 @@ import useAxiosSecure from './../hooks/useAxiosSecure';
                navigate(location?.state ? location.state : "/");
             }
           })
-
          
         })
         .catch((err) => {
@@ -56,9 +55,17 @@ import useAxiosSecure from './../hooks/useAxiosSecure';
     const handleLoginWithGoogle = () => {
       googleLogin()
         .then((res) => {
-          // console.log(res.user);
+          // console.log(res.user?.email);
           toast.success("Login success.");
-          navigate(location?.state ? location.state : "/");
+          const user = {email:res.user?.email};
+
+          axiosSecure.post('/jwt', user)
+          .then(res=> {
+            // console.log(res.data);
+            if(res.data?.success){
+               navigate(location?.state ? location.state : "/");
+            }
+          })
         })
         .catch((err) => {
           // console.log(err);
