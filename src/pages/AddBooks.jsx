@@ -129,7 +129,7 @@ const AddBooks = () => {
                   type="text"
                   className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
-                  <option value="Novel">Kids</option>
+                  <option value="Kids">Kids</option>
                   <option value="Comics">Comics</option>
                   <option value="History">History</option>
                   <option value="Sci-Fi">Sci-Fi</option>

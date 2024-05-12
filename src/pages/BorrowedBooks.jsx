@@ -28,7 +28,7 @@ const BorrowedBooks = () => {
       </div>
     );
   return (
-    <div className="my-10">
+    <div className="my-10 mx-2">
       <Helmet>
         <title>Borrowed Books | BookShelf</title>
       </Helmet>

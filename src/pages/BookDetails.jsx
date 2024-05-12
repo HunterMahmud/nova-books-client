@@ -110,9 +110,9 @@ const BookDetails = () => {
             axiosSecure
               .patch(`/books/${_id}`, { operation: "-" })
               .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res?.data?._id) {
-                  console.log(_id, borrowInfo);
+                  // console.log(_id, borrowInfo);
                   refetch();
                 }
               });

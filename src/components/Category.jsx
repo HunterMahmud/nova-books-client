@@ -13,7 +13,7 @@ const Category = () => {
     });
   }, []);
   return (
-    <div>
+    <div className="mx-2">
       <h1 className="text-3xl lg:text-5xl font-bold font-bugrasimo text-center mt-7 my-3 text-gray-900 dark:text-gray-100">
         Category Section
       </h1>

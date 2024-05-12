@@ -21,7 +21,7 @@ const againReload = ()=> {
 
 }
   return (
-    <div className="my-10">
+    <div className="my-10 mx-2">
       <Helmet>
         <title>{cate} Book | BookShelf</title>
       </Helmet>

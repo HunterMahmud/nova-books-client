@@ -18,7 +18,7 @@ const BookCard = ({ book, status ,againReload }) => {
     // console.log(id);
     axiosSecure.delete(`/borrow/${id}`)
     .then(res=> {
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data?.deletedCount>0){
         axiosSecure.patch(`/books/${book.id}`,{operation:'+'})
         .then(res=> {
@@ -31,7 +31,7 @@ const BookCard = ({ book, status ,againReload }) => {
   }
 
   return (
-    <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
+    <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
       <div className="w-full h-72 flex items-center justify-center">
         <img
           className="object-cover object-center w-48 h-72"
