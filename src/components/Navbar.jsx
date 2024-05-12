@@ -56,15 +56,7 @@ const Navbar = () => {
         </>
       )}
 
-      {!user && (
-        <>
-          <li>
-            <NavLink className="text-base sm:text-lg lg:text-sm" to="/register">
-              Register
-            </NavLink>
-          </li>
-        </>
-      )}
+     
     </>
   );
   const handleLogOut = () => {

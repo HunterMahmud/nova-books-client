@@ -69,6 +69,9 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = async () => {
     setLoading(true);
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/logout`, {
+      withCredentials: true,
+    });
     return signOut(auth);
   };
   useEffect(() => {
