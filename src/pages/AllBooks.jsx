@@ -5,6 +5,7 @@ import useAxiosSecure from "./../hooks/useAxiosSecure";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ScrollRestoration } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AllBooks = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,8 +17,16 @@ const AllBooks = () => {
     });
   }, []);
   const againReload = () => {};
+  const handleShowAvailableBook = () => {
+    // console.log('clicked');
+    axiosSecure.get(`/allBooks?quantity=0`).then((res) => {
+      // console.log(res.data);
+      setAllBooks(res.data);
+      toast.info('Showing available books only');
+    });
+  };
   return (
-    <div className="my-10">
+    <div className="my-10 mx-2">
       <Helmet>
         <title>All Book | BookShelf</title>
       </Helmet>
@@ -28,7 +37,14 @@ const AllBooks = () => {
       >
         Find your favorite books here
       </h1>
-
+      <div className="mb-5">
+        <button
+          onClick={handleShowAvailableBook}
+          className="btn hover:bg-violet-700 bg-violet-600 text-white rounded-lg"
+        >
+          Show Available Books
+        </button>
+      </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {allBooks.map((book) => (
           <BookCard
