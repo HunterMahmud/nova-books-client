@@ -11,9 +11,10 @@ import {
   import { FaEye } from 'react-icons/fa';
   import { FaEyeSlash } from 'react-icons/fa';
   import useAuthProvider from './../hooks/useAuthProvider';
+import useAxiosSecure from './../hooks/useAxiosSecure';
 
   const Login = () => {
-    
+    const axiosSecure = useAxiosSecure();
     const [showPass, setShowPass] = useState(false);
     const {
       register,
@@ -27,14 +28,25 @@ import {
     // console.log(location);
   
     const onSubmitLogin = (data) => {
-      console.log(data);
+      // console.log(data);
       const { email, password } = data;
       emailPasswordLogIn(email, password)
         .then((res) => {
           // console.log(res.user);
   
           toast.success("Login success.");
-          navigate(location?.state ? location.state : "/");
+          //generate jwt token
+          const user = {email};
+
+          axiosSecure.post('/jwt', user)
+          .then(res=> {
+            // console.log(res.data);
+            if(res.data?.success){
+               navigate(location?.state ? location.state : "/");
+            }
+          })
+
+         
         })
         .catch((err) => {
           // console.log(err);

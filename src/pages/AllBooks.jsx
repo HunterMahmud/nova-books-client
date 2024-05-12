@@ -10,7 +10,7 @@ const AllBooks = () => {
   const axiosSecure = useAxiosSecure();
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
-    axiosSecure.get("/allBooks").then((res) => {
+    axiosSecure.get(`/allBooks`).then((res) => {
       // console.log(JSON.stringify(res.data));
       setAllBooks(res.data);
     });

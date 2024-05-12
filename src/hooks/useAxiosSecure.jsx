@@ -1,5 +1,7 @@
 
 import axios  from 'axios';
+import useAuthProvider from './useAuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const axiosSecure = axios.create({
     baseURL: 'http://localhost:3000',
@@ -8,6 +10,18 @@ const axiosSecure = axios.create({
 
 })
 const useAxiosSecure = () => {
+    const {logOut} = useAuthProvider();
+    const navigate = useNavigate();
+    axiosSecure.interceptors.response.use((res)=> {
+        return res;
+    }, async(err)=> {
+        console.log(err.response);
+        if(err.response?.status == 403 || err.response?.status == 401){
+            await logOut();
+            navigate('/login');
+        }
+        return Promise.reject(err);
+    })
     return axiosSecure;
 };
 
