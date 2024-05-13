@@ -113,27 +113,12 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex items-center gap-3">
-            <div className="text-black">
-              <button className="text-2xl bg-gray-300 hover:bg-gray-400 p-2 rounded-full">
-                {theme == "dark" ? (
-                  <FiSun
-                    onClick={() => {
-                      localStorage.setItem("theme", "light");
-                      return setTheme("light");
-                    }}
-                  />
-                ) : (
-                  <FiMoon
-                    onClick={() => {
-                      localStorage.setItem("theme", "dark");
-                      return setTheme("dark");
-                    }}
-                  />
-                )}
-              </button>
-            </div>
+            
             {user ? (
               <>
+              <div>
+                <p className="text-xs font-poppins hidden sm:block font-bold">{user?.displayName}</p>
+              </div>
                 <img
                   // style={{ display: window.innerWidth <= 541 ? 'block' : 'none' }}
                   referrerPolicy="no-referrer"
@@ -161,6 +146,25 @@ const Navbar = () => {
                 </button>
               </Link>
             )}
+            <div className="text-black">
+              <button className="text-2xl bg-gray-300 hover:bg-gray-400 p-2 rounded-full">
+                {theme == "dark" ? (
+                  <FiSun
+                    onClick={() => {
+                      localStorage.setItem("theme", "light");
+                      return setTheme("light");
+                    }}
+                  />
+                ) : (
+                  <FiMoon
+                    onClick={() => {
+                      localStorage.setItem("theme", "dark");
+                      return setTheme("dark");
+                    }}
+                  />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>

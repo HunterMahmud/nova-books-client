@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/category/:categoryName',
-                element: <ProtectedRoute><CategoryPage/></ProtectedRoute>,
+                element: <CategoryPage/>,
                 
             },
             {
