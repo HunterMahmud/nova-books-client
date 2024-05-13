@@ -75,7 +75,7 @@
 
 - **1. aos:** Animates elements or components.
 - **2. axios:** Manages HTTP requests (GET, POST, PATCH) and responses.
-- **3. dotenv:** Hides configuration secrets.
+- **3. react-datepicker:** To pick date with good looking UI.
 - **4. firebase:** Handles authentication.
 - **5. react-helmet-async:** Dynamically sets page titles.
 - **6. react-hook-form:** Manages forms efficiently.
