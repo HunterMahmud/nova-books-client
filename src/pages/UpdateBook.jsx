@@ -80,7 +80,7 @@ const UpdateBook = () => {
       <p
         data-aos="fade-down"
         data-aos-delay={100}
-        className="text-center text-gray-800 dark:text-gray-200"
+        className="text-center text-gray-800 dark:text-gray-100"
       >
         Fill the form to update your favorite book.
       </p>
@@ -89,7 +89,7 @@ const UpdateBook = () => {
           <section
             data-aos="fade-down"
             data-aos-delay={300}
-            className="p-6 my-10 lg:col-span-3 rounded-md text-black dark:text-gray-200 dark:bg-gray-600 bg-card"
+            className="p-6 my-10 lg:col-span-3 rounded-md text-black dark:text-gray-100 dark:bg-gray-900 bg-white border border-gray-200 dark:border-gray-800"
           >
             <form
               onSubmit={handleSubmit(onSubmitBook)}
@@ -110,7 +110,7 @@ const UpdateBook = () => {
                   type="text"
                   required={true}
                   placeholder="Ex: The Designer's Cookbook"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                  className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />{" "}
                 {errors?.bookName?.message && (
                   <span className="text-red-500">
@@ -134,7 +134,7 @@ const UpdateBook = () => {
                   id="category"
                   required={true}
                   type="text"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                  className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 >
                   <option value="Kids">Kids</option>
                   <option value="Comics">Comics</option>
@@ -157,7 +157,7 @@ const UpdateBook = () => {
                   type="text"
                   required={true}
                   placeholder="Ex: Jim Richardson"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                  className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
                 {errors?.author?.message && (
                   <span className="text-red-500">{errors.author.message}</span>
@@ -179,7 +179,7 @@ const UpdateBook = () => {
                   type="url"
                   required={true}
                   placeholder="Ex: https://www.image.com/img.jpg"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                  className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
                 {errors?.bookUrl?.message && (
                   <span className="text-red-500">{errors.bookUrl.message}</span>
@@ -215,7 +215,7 @@ const UpdateBook = () => {
                   step="0.1"
                   type="number"
                   placeholder="Ex: 4"
-                  className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+                  className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
                 />
                 {errors?.ratings?.message && (
                   <span className="text-red-500">{errors.ratings.message}</span>

@@ -53,6 +53,7 @@ const BookDetails = () => {
     context,
     category,
     quantity,
+    short_desc,
     ratings,
   } = bookInfo;
   const handleSubmit = () => {
@@ -205,7 +206,15 @@ const BookDetails = () => {
 
             <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
               <dt className="font-medium text-gray-900 dark:text-gray-100">
-                Context Info
+                Short Description
+              </dt>
+              <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
+                {short_desc}
+              </dd>
+            </div>
+            <div className="grid grid-cols-1 gap-1 p-3  sm:grid-cols-3 sm:gap-4">
+              <dt className="font-medium text-gray-900 dark:text-gray-100">
+                Book Context
               </dt>
               <dd className="text-gray-700 dark:text-gray-100 sm:col-span-2">
                 {context}

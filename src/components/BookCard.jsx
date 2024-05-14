@@ -31,7 +31,7 @@ const BookCard = ({ book, status ,againReload }) => {
   }
 
   return (
-    <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-800">
+    <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg border border-violet-400/30 dark:bg-gray-900">
       <div className="w-full h-72 flex items-center justify-center">
         <img
           className="object-cover object-center w-48 h-72"
@@ -40,27 +40,27 @@ const BookCard = ({ book, status ,againReload }) => {
         />
       </div>
 
-      <div className="flex items-center px-6 py-3 bg-gray-100 text-gray-800 dark:text-white dark:bg-gray-600">
+      <div className="flex items-center px-6 py-3 bg-gray-100 text-gray-900 dark:text-white dark:bg-gray-800">
         <TbCategory />
 
-        <h1 className="mx-3 text-lg text-gray-800 font-semibold dark:text-white">
+        <h1 className="mx-3 text-lg text-gray-900 font-semibold dark:text-white">
           {category}
         </h1>
       </div>
 
       <div className="px-6 flex flex-col justify-between">
-        <h1 className="text-xl my-2 font-semibold text-gray-800 dark:text-white">
+        <h1 className="text-xl my-2 font-semibold text-gray-900 dark:text-white">
           {bookName}
         </h1>
         {status == 3 ? (
           <>
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-900 dark:text-gray-100">
               <span className="font-semibold">Borrow Date:</span>
               <h1 className="px-2 text-sm">
                  {new Date(book.borrowedDate).toLocaleDateString()}
               </h1>
             </div>
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-900 dark:text-gray-100">
               <span className="font-semibold">Return Date:</span>
               <h1 className="px-2 text-sm">
                 {new Date(book.returnDate).toLocaleDateString()}
@@ -69,12 +69,12 @@ const BookCard = ({ book, status ,againReload }) => {
           </>
         ) : (
           <>
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-900 dark:text-gray-100">
               <FaBook />
 
               <h1 className="px-2 text-sm">{author}</h1>
             </div>
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-900 dark:text-gray-100">
               <Rating style={{ maxWidth: 150 }} readOnly value={ratings} />
             </div>
           </>

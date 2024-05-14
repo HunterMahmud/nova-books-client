@@ -54,7 +54,7 @@ const AllBooks = () => {
               onChange={(event) => setViewControl(event.target.value)}
               value={viewControl}
               type="text"
-              className="w-full dark:bg-gray-700 dark:placeholder:text-gray-300 dark:text-gray-200 placeholder:text-gray-700 rounded-md p-2.5 focus:ring focus:ring-opacity-75 text-black bg-gray-200 border-2 border-gray-400"
+              className="w-full dark:bg-gray-900 dark:placeholder:text-gray-100 dark:text-gray-100 placeholder:text-gray-900 rounded-md p-2.5 focus:ring focus:ring-opacity-75 text-black bg-gray-100 border-2 border-gray-400"
             >
               <option value="card">Card View</option>
               <option value="table">Table View</option>
