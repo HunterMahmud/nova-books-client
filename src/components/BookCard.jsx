@@ -16,10 +16,10 @@ const BookCard = ({ book, status ,againReload }) => {
   // console.log(ratings);
   const handleReturn = (id) => {
     // console.log(id);
-    axiosSecure.delete(`/borrow/${id}`)
+    axiosSecure.patch(`/borrow/${id}`)
     .then(res=> {
       // console.log(res.data);
-      if(res.data?.deletedCount>0){
+      if(res.data?.modifiedCount>0){
         axiosSecure.patch(`/books/${book.id}`,{operation:'+'})
         .then(res=> {
           // console.log(res.data);

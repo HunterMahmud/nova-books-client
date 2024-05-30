@@ -20,15 +20,26 @@ const BookDetails = () => {
   // const loadedBookInfo = useLoaderData();
   const { id } = useParams();
   const [bookInfo, setBookInfo] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuthProvider();
   const { email, displayName } = user;
   // console.log(user);
   //   console.log(bookInfo);
   const refetch = () => {
-    axiosSecure.get(`books/${id}`).then((res) => {
-      setBookInfo(res.data);
-    });
+    setLoading(true);
+    // console.log('staring');
+    axiosSecure
+      .get(`books/${id}`)
+      .then((res) => {
+        // console.log(res.data);
+        setBookInfo(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        // console.log(err.message);
+        setBookInfo(null);
+      });
   };
   useEffect(() => {
     refetch();
@@ -129,7 +140,7 @@ const BookDetails = () => {
   const handleCancel = () => {
     setIsOpen(false);
   };
-  if (bookInfo.length == 0) {
+  if (loading) {
     return (
       <div className="w-full bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 min-h-[calc(100vh-349px)] flex items-center justify-center">
         <span className="loading loading-spinner loading-lg"></span>

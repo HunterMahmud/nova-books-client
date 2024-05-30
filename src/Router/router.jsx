@@ -11,6 +11,7 @@ import BorrowedBooks from "./../pages/BorrowedBooks";
 import UpdateBook from "./../pages/UpdateBook";
 import CategoryPage from "./../components/CategoryPage";
 import BookDetails from "./../pages/BookDetails";
+import ReadList from "../pages/ReadList";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <AllBooks />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/read-list",
+        element: (
+          <ProtectedRoute>
+           <ReadList/>
           </ProtectedRoute>
         ),
       },

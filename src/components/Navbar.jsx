@@ -53,6 +53,14 @@ const Navbar = () => {
               Borrowed Books
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              className="text-base sm:text-lg lg:text-sm"
+              to="/read-list"
+            >
+              Read List
+            </NavLink>
+          </li>
         </>
       )}
 
