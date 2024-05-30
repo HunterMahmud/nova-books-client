@@ -5,8 +5,8 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const ReadListTableView = ({ book }) => {
-  const { id, author, bookName, bookUrl, category, ratings } = book;
-//   console.log(book);
+  const { id, author, bookName, bookUrl, category, borrowedDate } = book;
+  console.log(book);
   return (
     <tr className="bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 ">
       <td className="size-px whitespace-nowrap">
@@ -48,7 +48,7 @@ const ReadListTableView = ({ book }) => {
       <td className="size-px ">
         <div className="block p-6">
           <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-            <Rating style={{ maxWidth: 120 }} readOnly value={ratings} />
+            {new Date(borrowedDate).toLocaleDateString()}
           </div>
         </div>
       </td>

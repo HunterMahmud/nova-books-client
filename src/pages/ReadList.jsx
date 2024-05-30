@@ -80,7 +80,7 @@ const ReadList = () => {
                           <th scope="col" className="px-6 py-3 text-start">
                             <div className="flex items-center gap-x-2">
                               <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                Ratings
+                                Borrow Date
                               </span>
                             </div>
                           </th>
