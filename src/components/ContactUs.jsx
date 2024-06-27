@@ -13,7 +13,7 @@ const ContactUs = () => {
         <div className="aspect-w-16 aspect-h-6 lg:aspect-h-14 overflow-hidden bg-gray-100 rounded-2xl dark:bg-neutral-800">
           <img
             className="group-hover:scale-105 transition-transform duration-500 ease-in-out object-cover rounded-2xl"
-            src="https://source.unsplash.com/people-sitting-down-near-table-with-assorted-laptop-computers-SYTO3xs06fU"
+            src="https://i.ibb.co/xKZbKn1/contact-us.jpg"
             alt="Image Description"
           />
         </div>

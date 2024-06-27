@@ -68,42 +68,42 @@ const Slider = () => {
       >
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/books-on-brown-wooden-shelf-2JIvboGLeho")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/PYcny3z/book1.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/assorted-title-book-lot-eeSdJfLfx1A")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/L5J91y6/book2.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/person-holding-pile-of-books-o0Qqw21-0NI")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/CzQqHsB/book3.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/assorted-title-book-lot-placed-on-white-wooden-shelf-f2Bi-VBs71M")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/6ZFk4Fj/book4.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/assorted-title-book-lot-beside-window-1J8k0qqUfYY")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/C92LzMn/book5.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/shallow-focus-photography-of-books-lUaaKCUANVI")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/X8J4Rdj/book6.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/shallow-focus-photography-of-stack-of-books-zvKx6ixUhWQ")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/0BH0LLr/book7.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://source.unsplash.com/book-lot-Bj7Pt0ZMBOk")] bg-center bg-no-repeat`}
+            className={`relative flex items-center justify-left h-[80vh] object-cover bg-cover bg-[linear-gradient(45deg,rgba(3,7,18,0.5),rgba(3,7,18,0)),url("https://i.ibb.co/SnqWyKc/book8.jpg")] bg-center bg-no-repeat`}
           ></div>
         </SwiperSlide>
       </Swiper>
